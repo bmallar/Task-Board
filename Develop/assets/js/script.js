@@ -1,8 +1,9 @@
 // Retrieve tasks and nextId from localStorage
-let taskList = JSON.parse(localStorage.getItem("tasks"));
-let nextId = JSON.parse(localStorage.getItem("nextId"));
+
+// let nextId = JSON.parse(localStorage.getItem("nextId"));
 let taskArray = JSON.parse(localStorage.getItem("taskList")) || []
 const cardContainer = document.getElementById('in-progress-cards')
+console.log(taskArray)
 function generateTaskId() {
 
 
@@ -21,7 +22,7 @@ function renderTaskList() {
 }
 
 // Todo: create a function to handle adding a new task
-function handleAddTask(event){
+function handleAddTask (event) {
  event.preventDefault()
 const descriptionInput = $('#modal-body-1').val("")
 const dateDueInput = $('#datepicker').val()
@@ -34,14 +35,15 @@ const taskObject = {
 }
 taskArray.push(taskObject)
 localStorage.setItem("taskList", JSON.stringify(taskArray))
-console.log(taskObject)
+console.log(taskObject) 
+}
 for (let i = 0; i < taskArray.length; i++) {
   
   const taskCard = document.createElement('div')
         taskCard.setAttribute("class", "taskCard")
 
         const taskEl = document.createElement('h4')
-        taskEl.textcontent = taskArray[i].task
+        taskEl.textContent = taskArray[i].task
 
         const titleEl = document.createElement('h4')
         titleEl.textContent = taskArray[i].title
@@ -56,7 +58,7 @@ for (let i = 0; i < taskArray.length; i++) {
         
 }
 
-}
+
 
 
 // Todo: create a function to handle deleting a task
