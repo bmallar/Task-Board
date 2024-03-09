@@ -23,18 +23,19 @@ function renderTaskList() {
 // Todo: create a function to handle adding a new task
 function handleAddTask(event){
  event.preventDefault()
- const descriptioninput = $('#modal-body-1').val()
-const taskinput = document.getElementById('modal-body-2').value
-const titleinput= document.getElementById('modal-body-3').value
+const descriptionInput = $('#modal-body-1').val("")
+const dateDueInput = $('#datepicker').val("")
+const titleInput= $('#modal-body-3').val("")
 
 const taskCard ={
-  task: taskinput,
-  title: titleinput,
-  description: descriptioninput
+  task: dateDueInput,
+  title: titleInput,
+  description: descriptionInput
 }
 taskArray.push(taskCard)
 localStorage.setItem("taskList", JSON.stringify(taskArray))
 console.log(taskCard)
+
 }
 
 
@@ -45,6 +46,7 @@ function handleDeleteTask(event){
 
 // Todo: create a function to handle dropping a task into a new status lane
 function handleDrop(event, ui) {
+  
   $( function() {
     $( "#draggable" ).draggable();
     $( "#droppable" ).droppable({
