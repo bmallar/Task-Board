@@ -20,4 +20,4 @@ Lastly is how i add the modal entries
 
 [link to my project](https://bmallar.github.io/Task-Board/)
 
-![My Project](<./assets/Screenshot (13).png>)
+![My Project](./Develop/assets/Screenshot%20(13).png)
