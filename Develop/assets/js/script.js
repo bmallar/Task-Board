@@ -24,7 +24,7 @@ function renderTaskList() {
 function handleAddTask(event){
  event.preventDefault()
 const descriptionInput = $('#modal-body-1').val("")
-const dateDueInput = $('#datepicker').val("")
+const dateDueInput = $('#datepicker').val()
 const titleInput= $('#modal-body-3').val("")
 
 const taskCard ={
@@ -35,12 +35,19 @@ const taskCard ={
 taskArray.push(taskCard)
 localStorage.setItem("taskList", JSON.stringify(taskArray))
 console.log(taskCard)
+// taskCard.append(dateDueInput, titleInput, descriptionInput);
 
 }
 
 
 // Todo: create a function to handle deleting a task
 function handleDeleteTask(event){
+  const cardDeleteBtn = $('<button>')
+  .addClass('btn btn-danger delete')
+  .text('Delete')
+  .attr('data-project-id', project.id);
+cardDeleteBtn.on('click', handleDeleteTask);
+
 
 }
 
