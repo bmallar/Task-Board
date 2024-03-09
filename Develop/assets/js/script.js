@@ -2,8 +2,8 @@
 
 // let nextId = JSON.parse(localStorage.getItem("nextId"));
 let taskArray = JSON.parse(localStorage.getItem("taskList")) || []
-const cardContainer = document.getElementById('in-progress-cards')
 console.log(taskArray)
+const cardContainer = document.getElementById('in-progress-cards')
 function generateTaskId() {
 
 
@@ -17,16 +17,36 @@ function createTaskCard(task) {
 
 // Todo: create a function to render the task list and make cards draggable
 function renderTaskList() {
+
+  for (let i = 0; i < taskArray.length; i++) {
   
+    const taskCard = document.createElement('div')
+          taskCard.setAttribute("class", "taskCard")
+  
+          const taskEl = document.createElement('h4')
+          taskEl.textContent = taskArray[i].task
+  
+          const titleEl = document.createElement('h4')
+          titleEl.textContent = taskArray[i].title
+  
+          const descriptionEl = document.createElement('h4')
+          descriptionEl.textContent = taskArray[i].description
+  
+          taskCard.append(taskEl, titleEl, descriptionEl)
+          cardContainer.append(taskCard)
+  
+      
+          
+  }
  
 }
 
 // Todo: create a function to handle adding a new task
 function handleAddTask (event) {
  event.preventDefault()
-const descriptionInput = $('#modal-body-1').val("")
+const descriptionInput = $('#modal-body-1').val()
 const dateDueInput = $('#datepicker').val()
-const titleInput= $('#modal-body-3').val("")
+const titleInput= $('#modal-body-3').val()
 
 const taskObject = {
   task: dateDueInput,
@@ -35,30 +55,15 @@ const taskObject = {
 }
 taskArray.push(taskObject)
 localStorage.setItem("taskList", JSON.stringify(taskArray))
-console.log(taskObject) 
+
+
+$('#datepicker').val("")
+$('#modal-body-1').val("")
+$('#modal-body-3').val("")
+
+renderTaskList();
+
 }
-for (let i = 0; i < taskArray.length; i++) {
-  
-  const taskCard = document.createElement('div')
-        taskCard.setAttribute("class", "taskCard")
-
-        const taskEl = document.createElement('h4')
-        taskEl.textContent = taskArray[i].task
-
-        const titleEl = document.createElement('h4')
-        titleEl.textContent = taskArray[i].title
-
-        const descriptionEl = document.createElement('h4')
-        descriptionEl.textContent = taskArray[i].description
-
-        taskCard.append(taskEl, titleEl, descriptionEl)
-        cardContainer.append(taskCard)
-
-    
-        
-}
-
-
 
 
 // Todo: create a function to handle deleting a task
@@ -90,7 +95,7 @@ function handleDrop(event, ui) {
 
 // Todo: when the page loads, render the task list, add event listeners, make lanes droppable, and make the due date field a date picker
 $(document).ready(function () {
- 
+ renderTaskList();
   
 })
 
