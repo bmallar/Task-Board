@@ -2,7 +2,7 @@
 let taskList = JSON.parse(localStorage.getItem("tasks"));
 let nextId = JSON.parse(localStorage.getItem("nextId"));
 let taskArray = JSON.parse(localStorage.getItem("taskList")) || []
-
+const cardContainer = document.getElementById('in-progress-cards')
 function generateTaskId() {
 
 
@@ -27,15 +27,34 @@ const descriptionInput = $('#modal-body-1').val("")
 const dateDueInput = $('#datepicker').val()
 const titleInput= $('#modal-body-3').val("")
 
-const taskCard ={
+const taskObject = {
   task: dateDueInput,
   title: titleInput,
   description: descriptionInput
 }
-taskArray.push(taskCard)
+taskArray.push(taskObject)
 localStorage.setItem("taskList", JSON.stringify(taskArray))
-console.log(taskCard)
-// taskCard.append(dateDueInput, titleInput, descriptionInput);
+console.log(taskObject)
+for (let i = 0; i < taskArray.length; i++) {
+  
+  const taskCard = document.createElement('div')
+        taskCard.setAttribute("class", "taskCard")
+
+        const taskEl = document.createElement('h4')
+        taskEl.textcontent = taskArray[i].task
+
+        const titleEl = document.createElement('h4')
+        titleEl.textContent = taskArray[i].title
+
+        const descriptionEl = document.createElement('h4')
+        descriptionEl.textContent = taskArray[i].description
+
+        taskCard.append(taskEl, titleEl, descriptionEl)
+        cardContainer.append(taskCard)
+
+    
+        
+}
 
 }
 
