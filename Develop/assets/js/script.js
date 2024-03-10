@@ -17,7 +17,7 @@ function createTaskCard(task) {
 
 // Todo: create a function to render the task list and make cards draggable
 function renderTaskList() {
-
+cardContainer.innerHTML = ""
   for (let i = 0; i < taskArray.length; i++) {
   
     const taskCard = document.createElement('div')
@@ -34,7 +34,19 @@ function renderTaskList() {
   
           taskCard.append(taskEl, titleEl, descriptionEl)
           cardContainer.append(taskCard)
-  
+          
+          if (taskArray.dueDate && taskArray.status !== 'done') {
+            const now = dayjs();
+            const taskDueDate = dayjs(taskArray.dueDate, 'DD/MM/YYYY');
+        
+            // ? If the task is due today, make the card yellow. If it is overdue, make it red.
+            if (now.isSame(taskDueDate, 'day')) {
+              taskCard.addClass('bg-done text-white');
+            } else if (now.isAfter(taskDueDate)) {
+              taskCard.addClass('bg-warning text-white');
+              cardDeleteBtn.addClass('border-light');
+            }
+          }
       
           
   }
@@ -69,11 +81,16 @@ renderTaskList();
 // Todo: create a function to handle deleting a task
 function handleDeleteTask(event){
   const cardDeleteBtn = $('<button>')
-  .addClass('btn btn-danger delete')
+  .addClass('btn btn-warning delete')
   .text('Delete')
   .attr('data-project-id', project.id);
 cardDeleteBtn.on('click', handleDeleteTask);
-
+if (now.isSame(taskDueDate, 'day')) {
+  taskCard.addClass('bg-done text-white');
+} else if (now.isAfter(taskDueDate)) {
+  taskCard.addClass('bg-warning text-white');
+  cardDeleteBtn.addClass('border-light');
+}
 
 }
 
